@@ -1,0 +1,16 @@
+{% extends 'Vilight/main.html' %}
+{% block content %}
+<form action = "" method="post">
+    {% csrf_token %}
+    <div class="card-header" id = "comment">
+       <h5 class="card-title" > QUẢN LÝ PHÊ DUYỆT </h5>
+    <div>
+        <br>
+        <table>{{form}}</table>    <!-- form được tạo dựa trên Form trong filters.py -->
+        <br>
+        <input type="submit" name="Submit">
+    </div>
+    </div>
+
+</form>
+{% endblock %}

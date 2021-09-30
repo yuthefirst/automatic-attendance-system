@@ -1,0 +1,55 @@
+{% extends 'Vilight/main.html' %}
+{% block content %}
+
+<style>
+    #export_btn{
+        background-color: #03fc4e;
+    }
+</style>
+
+<br>
+<div class="col">
+  <div class="col-md">
+   <div class="card text-center text-black  mb-3" id="diem-danh">
+      <div class="card-header">
+       <h5 class="card-title">CHỈNH SỬA ĐIỂM DANH</h5>
+          <div class="col-md">
+          <form method="get">
+                {{ myFilter.form }}
+                <button class="btn btn-primary" type="submit">Search</button>
+                <button class="btn btn-primary" type="submit" formaction="{% url 'export_excel'%}" id = "export_btn">Export</button>   <!-- SUBMIT BUTTON MỚI ĐẨY ĐƯỢC FORM VÀO -->
+<!--              <a class = "btn btn-sm btn-danger" href="{% url 'export_excel'%}"> Export </a>  CÁI NÀY EXPORT TOÀN BỘ -->
+          </form>
+          </div>
+      </div>
+      <table class="table table-sm" id = "body-diemdanh" style="width:100%; height:100% " >
+   <tr>
+    <th>NGÀY</th>
+    <th>ID</th>
+    <th>TÊN</th>
+    <th>VỊ TRÍ</th>
+    <th>CHECK IN</th>
+    <th>CHECK MID</th>
+    <th>CHECK OUT</th>
+    <th>PHẢN HỒI</th>
+    <th>PHÊ DUYỆT</th>
+   </tr>
+         {% for i in myFilter.qs %}
+      <tr>
+          <td>{{i.date}}</td>
+          <td>{{i.staff_id}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.position}}</td>
+          <td>{{i.checkin}}</td>
+          <td>{{i.checkmid}}</td>
+          <td>{{i.checkout}}</td>
+          <td>{{i.comment}}</td>
+          <td>{{i.admin_comment}}</td>
+          <td><a class = "btn btn-sm btn-danger" href="{% url 'edit_attendant' i.id %}"> Edit </a></td>
+      </tr>
+    {% endfor %}
+  </table>
+      </div>
+   </div>
+  </div>
+{% endblock %}
